@@ -1,6 +1,5 @@
 import { getProducts } from './actions'
 import Grid from './components/Grid'
-
 export interface Product {
   id: number
   name: string
@@ -8,6 +7,8 @@ export interface Product {
   defaultBuyPrice: string
   defaultSellPrice: string
 }
+
+export const dynamic = 'force-dynamic'
 
 export default async function Dashboard() {
   const { products } = await getProducts()

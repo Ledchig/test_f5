@@ -2,8 +2,9 @@
 
 import { cookies } from 'next/headers'
 
-export const getProducts = async () => {
+export async function getProducts() {
   try {
+    const cookieData = cookies().get('accessToken')?.value
     const query = `
         query {
             products {
@@ -21,7 +22,7 @@ export const getProducts = async () => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${cookies().get('accessToken')?.value}`,
+        Authorization: `Bearer ${cookieData}`,
       },
       body: JSON.stringify({ query }),
     })
