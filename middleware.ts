@@ -6,16 +6,16 @@ export const config = {
 }
 
 const authMiddleware = (req: NextRequest) => {
-  const { pathname, origin } = req.nextUrl
+  const { pathname } = req.nextUrl
 
   const token = cookies().get('accessToken')?.value
 
   if (pathname === '/dashboard' && !token) {
-    return NextResponse.redirect(`${origin}/`)
+    return NextResponse.redirect('/')
   }
 
   if (pathname === '/' && token) {
-    return NextResponse.redirect(`${origin}/dashboard`)
+    return NextResponse.redirect('/dashboard')
   }
 
   return NextResponse.next()
