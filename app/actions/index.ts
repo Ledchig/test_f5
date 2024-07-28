@@ -27,10 +27,9 @@ export const login = async (email: string, password: string) => {
       maxAge: 60 * 60 * 24,
       sameSite: 'lax',
     })
-
-    redirect('/dashboard')
+    return { status: 'ok' }
   } catch (err) {
     console.log(err)
-    return { error: 'Failed to login' }
+    return { status: 'Failed to login' }
   }
 }

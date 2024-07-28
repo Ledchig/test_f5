@@ -3,15 +3,20 @@
 import { FormEvent, useState } from 'react'
 import { Button, TextField } from '@mui/material'
 import { login } from './actions'
+import { useRouter } from 'next/navigation'
 
 export default function Home() {
   const [isDisabled, setIsDisabled] = useState(false)
+  const router = useRouter()
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
     setIsDisabled(true)
     const data = new FormData(e.target as HTMLFormElement)
-    await login(data.get('email') as string, data.get('password') as string)
+    const { status } = await login(data.get('email') as string, data.get('password') as string)
+    if (status === 'ok') {
+      router.push('/dashboard')
+    }
     setIsDisabled(false)
   }
 
